@@ -1,20 +1,16 @@
 package Day2
 
 import java.io.File
-import java.lang.RuntimeException
 
 fun main() {
     File("Day2/Day2.txt").useLines { lines ->
-        val result = lines
-            .map { RoundPart2(it[0].toHand(), it[2].toResult()) }
-            .map { it.points() }
-            .sum()
-        println("Total score: $result")
+        lines.sumOf {
+            RoundPart2(it[0].toHand(), it[2].toResult()).points()
+        }.also { println("Result: $it") }
     }
 }
 
 data class RoundPart2(val thy: Hand, val result: Result) {
-
     fun points(): Int = when (result) {
         Result.DRAW -> thy.point
         Result.LOSE -> thy.lose().point
@@ -30,7 +26,7 @@ fun Char.toResult(): Result = when (this) {
     'X' -> Result.LOSE
     'Y' -> Result.DRAW
     'Z' -> Result.WIN
-    else -> throw RuntimeException()
+    else -> throw IllegalArgumentException()
 }
 
 fun Hand.lose() = when (this) {

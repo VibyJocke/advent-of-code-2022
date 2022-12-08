@@ -21,6 +21,8 @@ fun main() {
             }
         }
 
-        stacks.map { it.firstOrNull() }.joinToString("").also { println("Result: $it") }
+        stacks.map { it.firstOrNull() }
+            .joinToString("")
+            .also { println("Result: $it") }
     }
 }

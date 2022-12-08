@@ -4,13 +4,13 @@ import java.io.File
 
 fun main() {
     File("Day1/Day1.txt").useLines { lines ->
-        val result = countCaloriesPerElf(lines)
-        println("Part 1: " + result.max())
-        println("Part 2: " + result.sortedDescending().take(3).sum())
+        countCaloriesPerElf(lines)
+            .max()
+            .also { println("Result: $it") }
     }
 }
 
-private fun countCaloriesPerElf(lines: Sequence<String>): List<Int> {
+fun countCaloriesPerElf(lines: Sequence<String>): List<Int> {
     val caloriesPerElf = mutableListOf<Int>()
     var currentValue = 0
     lines.forEach {

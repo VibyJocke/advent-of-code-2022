@@ -17,18 +17,16 @@ fun main() {
             }
         }
 
-        stacks.map { it.firstOrNull() }.joinToString("").also { println("Result: $it") }
+        stacks.map { it.firstOrNull() }
+            .joinToString("")
+            .also { println("Result: $it") }
     }
 }
 
 fun createStacks(lines: List<String>): List<ArrayDeque<Char>> {
     val endLine = lines.withIndex().first { it.value.replace(" ", "").toIntOrNull() != null }
     val numStacks = endLine.value.toCharArray().count { it.isDigit() }
-    val stacks = mutableListOf<ArrayDeque<Char>>().apply {
-        repeat(numStacks) {
-            this.add(ArrayDeque())
-        }
-    }
+    val stacks = Array<ArrayDeque<Char>>(numStacks) { ArrayDeque() }
     lines.take(endLine.index)
         .forEach {
             it.toCharArray()
@@ -36,7 +34,7 @@ fun createStacks(lines: List<String>): List<ArrayDeque<Char>> {
                     if (char.isLetter()) stacks[(index - 1) / 4].addLast(char)
                 }
         }
-    return stacks
+    return stacks.toList()
 }
 
 data class Command(val num: Int, val origin: Int, val destination: Int)

@@ -1,20 +1,16 @@
 package Day2
 
 import java.io.File
-import java.lang.RuntimeException
 
 fun main() {
     File("Day2/Day2.txt").useLines { lines ->
-        val result = lines
-            .map { Round(it[0].toHand(), it[2].toHand()) }
-            .map { it.points() }
-            .sum()
-        println("Total score: $result")
+        lines.sumOf {
+            Round(it[0].toHand(), it[2].toHand()).points()
+        }.also { println("Result: $it") }
     }
 }
 
 data class Round(val thy: Hand, val my: Hand) {
-
     fun points(): Int = when {
         my == thy.win() -> 6
         thy == my -> 3
