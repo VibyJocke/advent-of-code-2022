@@ -1,7 +1,9 @@
+package Day1
+
 import java.io.File
 
 fun main() {
-    File("Day1.txt").useLines { lines ->
+    File("Day1/Day1.txt").useLines { lines ->
         val result = countCaloriesPerElf(lines)
         println("Part 1: " + result.max())
         println("Part 2: " + result.sortedDescending().take(3).sum())

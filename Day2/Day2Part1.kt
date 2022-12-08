@@ -1,8 +1,10 @@
+package Day2
+
 import java.io.File
 import java.lang.RuntimeException
 
 fun main() {
-    File("Day2.txt").useLines { lines ->
+    File("Day2/Day2.txt").useLines { lines ->
         val result = lines
             .map { Round(it[0].toHand(), it[2].toHand()) }
             .map { it.points() }
